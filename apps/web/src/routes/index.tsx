@@ -1,7 +1,7 @@
-import { createFileRoute } from "@tanstack/solid-router";
-import { useQuery } from "@tanstack/solid-query";
-import { orpc } from "../utils/orpc";
-import { Match, Switch } from "solid-js";
+import {createFileRoute} from "@tanstack/solid-router";
+import {useQuery} from "@tanstack/solid-query";
+import {orpc} from "../utils/orpc";
+import {Match, Switch} from "solid-js";
 
 export const Route = createFileRoute("/")({
   component: App,
@@ -25,6 +25,7 @@ const TITLE_TEXT = `
 
 function App() {
   const healthCheck = useQuery(() => orpc.healthCheck.queryOptions());
+  console.log("Health Check", healthCheck);
 
   return (
     <div class="container mx-auto max-w-3xl px-4 py-2">
@@ -35,8 +36,7 @@ function App() {
           <Switch>
             <Match when={healthCheck.isPending}>
               <div class="flex items-center gap-2">
-                <div class="h-2 w-2 rounded-full bg-gray-500 animate-pulse" />{" "}
-                <span class="text-sm text-muted-foreground">Checking...</span>
+                <div class="h-2 w-2 rounded-full bg-gray-500 animate-pulse" /> <span class="text-sm text-muted-foreground">Checking...</span>
               </div>
             </Match>
             <Match when={healthCheck.isError}>
@@ -47,14 +47,8 @@ function App() {
             </Match>
             <Match when={healthCheck.isSuccess}>
               <div class="flex items-center gap-2">
-                <div
-                  class={`h-2 w-2 rounded-full ${healthCheck.data ? "bg-green-500" : "bg-red-500"}`}
-                />
-                <span class="text-sm text-muted-foreground">
-                  {healthCheck.data
-                    ? "Connected"
-                    : "Disconnected"}
-                </span>
+                <div class={`h-2 w-2 rounded-full ${healthCheck.data ? "bg-green-500" : "bg-red-500"}`} />
+                <span class="text-sm text-muted-foreground">{healthCheck.data ? "Connected" : "Disconnected"}</span>
               </div>
             </Match>
           </Switch>
