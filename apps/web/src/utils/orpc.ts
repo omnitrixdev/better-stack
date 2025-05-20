@@ -1,9 +1,9 @@
-import { createORPCClient } from "@orpc/client";
-import { RPCLink } from "@orpc/client/fetch";
-import { createORPCSolidQueryUtils } from "@orpc/solid-query";
-import { QueryCache, QueryClient } from "@tanstack/solid-query";
-import type { appRouter } from "../../../server/src/routers/index";
-import type { RouterClient } from "@orpc/server";
+import { createORPCClient } from '@orpc/client';
+import { RPCLink } from '@orpc/client/fetch';
+import { createORPCSolidQueryUtils } from '@orpc/solid-query';
+import { QueryCache, QueryClient } from '@tanstack/solid-query';
+import type { appRouter } from '../../../server/src/routers/index';
+import type { RouterClient } from '@orpc/server';
 
 export const queryClient = new QueryClient({
   queryCache: new QueryCache({
@@ -18,7 +18,7 @@ export const link = new RPCLink({
   fetch(url, options) {
     return fetch(url, {
       ...options,
-      credentials: "include",
+      credentials: 'include',
     });
   },
 });

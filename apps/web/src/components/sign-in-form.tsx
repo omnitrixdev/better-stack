@@ -1,8 +1,8 @@
-import { authClient } from "@/lib/auth-client";
-import { createForm } from "@tanstack/solid-form";
-import { useNavigate } from "@tanstack/solid-router";
-import { z } from "zod";
-import { For } from "solid-js";
+import { authClient } from '@/lib/auth-client';
+import { createForm } from '@tanstack/solid-form';
+import { useNavigate } from '@tanstack/solid-router';
+import { z } from 'zod';
+import { For } from 'solid-js';
 
 export default function SignInForm({
   onSwitchToSignUp,
@@ -10,13 +10,13 @@ export default function SignInForm({
   onSwitchToSignUp: () => void;
 }) {
   const navigate = useNavigate({
-    from: "/",
+    from: '/',
   });
 
   const form = createForm(() => ({
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     onSubmit: async ({ value }) => {
       await authClient.signIn.email(
@@ -27,9 +27,9 @@ export default function SignInForm({
         {
           onSuccess: () => {
             navigate({
-              to: "/dashboard",
+              to: '/dashboard',
             });
-            console.log("Sign in successful");
+            console.log('Sign in successful');
           },
           onError: (error) => {
             console.error(error.error.message);
@@ -39,15 +39,15 @@ export default function SignInForm({
     },
     validators: {
       onSubmit: z.object({
-        email: z.string().email("Invalid email address"),
-        password: z.string().min(8, "Password must be at least 8 characters"),
+        email: z.string().email('Invalid email address'),
+        password: z.string().min(8, 'Password must be at least 8 characters'),
       }),
     },
   }));
 
   return (
-    <div class="mx-auto w-full mt-10 max-w-md p-6">
-      <h1 class="mb-6 text-center text-3xl font-bold">Welcome Back</h1>
+    <div class='mx-auto w-full mt-10 max-w-md p-6'>
+      <h1 class='mb-6 text-center text-3xl font-bold'>Welcome Back</h1>
 
       <form
         onSubmit={(e) => {
@@ -55,25 +55,25 @@ export default function SignInForm({
           e.stopPropagation();
           void form.handleSubmit();
         }}
-        class="space-y-4"
+        class='space-y-4'
       >
         <div>
-          <form.Field name="email">
+          <form.Field name='email'>
             {(field) => (
-              <div class="space-y-2">
+              <div class='space-y-2'>
                 <label for={field().name}>Email</label>
                 <input
                   id={field().name}
                   name={field().name}
-                  type="email"
+                  type='email'
                   value={field().state.value}
                   onBlur={field().handleBlur}
                   onInput={(e) => field().handleChange(e.currentTarget.value)}
-                  class="w-full rounded border p-2"
+                  class='w-full rounded border p-2'
                 />
                 <For each={field().state.meta.errors}>
                   {(error) => (
-                    <p class="text-sm text-red-600">{error?.message}</p>
+                    <p class='text-sm text-red-600'>{error?.message}</p>
                   )}
                 </For>
               </div>
@@ -82,22 +82,22 @@ export default function SignInForm({
         </div>
 
         <div>
-          <form.Field name="password">
+          <form.Field name='password'>
             {(field) => (
-              <div class="space-y-2">
+              <div class='space-y-2'>
                 <label for={field().name}>Password</label>
                 <input
                   id={field().name}
                   name={field().name}
-                  type="password"
+                  type='password'
                   value={field().state.value}
                   onBlur={field().handleBlur}
                   onInput={(e) => field().handleChange(e.currentTarget.value)}
-                  class="w-full rounded border p-2"
+                  class='w-full rounded border p-2'
                 />
                 <For each={field().state.meta.errors}>
                   {(error) => (
-                    <p class="text-sm text-red-600">{error?.message}</p>
+                    <p class='text-sm text-red-600'>{error?.message}</p>
                   )}
                 </For>
               </div>
@@ -108,21 +108,21 @@ export default function SignInForm({
         <form.Subscribe>
           {(state) => (
             <button
-              type="submit"
-              class="w-full rounded bg-indigo-600 p-2 text-white hover:bg-indigo-700 disabled:opacity-50"
+              type='submit'
+              class='w-full rounded bg-indigo-600 p-2 text-white hover:bg-indigo-700 disabled:opacity-50'
               disabled={!state().canSubmit || state().isSubmitting}
             >
-              {state().isSubmitting ? "Submitting..." : "Sign In"}
+              {state().isSubmitting ? 'Submitting...' : 'Sign In'}
             </button>
           )}
         </form.Subscribe>
       </form>
 
-      <div class="mt-4 text-center">
+      <div class='mt-4 text-center'>
         <button
-          type="button"
+          type='button'
           onClick={onSwitchToSignUp}
-          class="text-sm text-indigo-600 hover:text-indigo-800 hover:underline"
+          class='text-sm text-indigo-600 hover:text-indigo-800 hover:underline'
         >
           Need an account? Sign Up
         </button>

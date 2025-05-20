@@ -1,9 +1,9 @@
-import SignInForm from "@/components/sign-in-form";
-import SignUpForm from "@/components/sign-up-form";
-import { createFileRoute } from "@tanstack/solid-router";
-import { createSignal, Match, Switch } from "solid-js";
+import SignInForm from '@/components/sign-in-form';
+import SignUpForm from '@/components/sign-up-form';
+import { createFileRoute } from '@tanstack/solid-router';
+import { createSignal, Match, Switch } from 'solid-js';
 
-export const Route = createFileRoute("/login")({
+export const Route = createFileRoute('/login')({
   component: RouteComponent,
 });
 

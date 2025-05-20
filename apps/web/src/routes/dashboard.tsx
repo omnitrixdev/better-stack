@@ -1,10 +1,10 @@
-import { authClient } from "@/lib/auth-client";
-import { orpc } from "@/utils/orpc";
-import { useQuery } from "@tanstack/solid-query";
-import { createFileRoute } from "@tanstack/solid-router";
-import { createEffect, Show } from "solid-js";
+import { authClient } from '@/lib/auth-client';
+import { orpc } from '@/utils/orpc';
+import { useQuery } from '@tanstack/solid-query';
+import { createFileRoute } from '@tanstack/solid-router';
+import { createEffect, Show } from 'solid-js';
 
-export const Route = createFileRoute("/dashboard")({
+export const Route = createFileRoute('/dashboard')({
   component: RouteComponent,
 });
 
@@ -17,7 +17,7 @@ function RouteComponent() {
   createEffect(() => {
     if (!session().data && !session().isPending) {
       navigate({
-        to: "/login",
+        to: '/login',
       });
     }
   });
